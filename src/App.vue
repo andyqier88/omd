@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <MarkDown msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MarkDown from './components/MarkDown.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MarkDown
   }
 }
 </script>

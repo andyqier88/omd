@@ -13,7 +13,7 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
-  "main": "electron/main.js",
+  "main": "background.js",
   "dependencies": {
     "@bytemd/plugin-frontmatter": "^1.15.0",
     "@bytemd/plugin-gfm": "^1.15.0",

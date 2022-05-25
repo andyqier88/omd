@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "moduleResolution": "node",
     "paths": {
@@ -15,5 +16,7 @@
       "dom.iterable",
       "scripthost"
     ]
-  }
+  },
+  "exclude": ["node_modules", "dist"]
+  
 }

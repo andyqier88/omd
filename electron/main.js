@@ -9,9 +9,6 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // const win = new BrowserWindow({ height: 600, width: 600 })
 
 
-
-
-
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
 // Scheme must be registered before the app is ready
@@ -31,7 +28,7 @@ async function createWindow() {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
     },
-    icon: path.join(__dirname, './../public/favicon.ico')
+    icon: path.join(__dirname, !isDevelopment ? './../dist_electron/bundled/favicon.ico' : './../public/favicon.ico')
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {

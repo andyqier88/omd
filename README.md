@@ -1,4 +1,5 @@
 # omd
+a desktop markdown app based on electron and bytemd
 
 ## Project setup
 ```

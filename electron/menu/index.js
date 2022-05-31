@@ -53,14 +53,16 @@ export const template = [
     submenu: [
       { role: "reload", label: "重新加载" },
       { role: "forceReload", label: "强制重新加载" },
-      { role: "toggleDevTools", label: "打开开发者工具" },
+      { role: "toggleDevTools", label: "打开/关闭开发者工具" },
+      
     ],
   },
-
+  // { role: 'about' }
   {
-    role: "关于",
+    label: "关于",
     submenu: [
       {
+        role: 'about',
         label: "关于",
         click: async () => {
           const { shell } = require("electron");

@@ -1,5 +1,6 @@
 import { dialog } from "electron";
 let fs = require("fs");
+
 // let dialog = new Dialog()
 export function save(content) {
   dialog
@@ -11,13 +12,14 @@ export function save(content) {
         },
       ],
       properties: ["openFile"],
+      defaultPath: '',
       message: "选择要导入的Mackdown文件",
-      buttonLabel: "导入",
+      buttonLabel: "导出",
       title: "保存文件",
     })
     .then((res) => {
-      console.log(res,content);
-      
+      // console.log(res,content);
+    
       fs.writeFileSync(res.filePath, content);
     })
     .catch((req) => {

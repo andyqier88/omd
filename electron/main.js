@@ -1,13 +1,20 @@
 'use strict'
 
 const path = require('path');
-import { app, protocol, Menu, BrowserWindow } from 'electron'
+import { app, protocol, Menu, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import { template } from './menu/index.js'
+import { save } from "./menu/save.js";
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 // const win = new BrowserWindow({ height: 600, width: 600 })
+// const {  } = require('electron');
 
+ipcMain.on('open-save-chart-dialog', (event, message) => {
+  // console.log(`receive message from render: ${message}`)
+  save(message)
+})
 
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
@@ -26,7 +33,8 @@ async function createWindow() {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
+      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      preload: path.join(__dirname, "preload.js") 
     },
     icon: path.join(__dirname, !isDevelopment ? './../dist_electron/bundled/favicon.ico' : './../public/favicon.ico')
   })
@@ -35,12 +43,17 @@ async function createWindow() {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // const contents = win.webContents
+    // console.log(contents)
+    // save(contents)
   } else {
     createProtocol('app')
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
+    
   }
   win.excludedFromShownWindowsMenu = true
+  
 }
 
 // Quit when all windows are closed.
@@ -56,6 +69,7 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
+
 })
 
 // This method will be called when Electron has finished
@@ -73,6 +87,10 @@ app.on('ready', async () => {
   createWindow()
 })
 
+app.whenReady().then(() => {
+  
+  
+})
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === 'win32') {

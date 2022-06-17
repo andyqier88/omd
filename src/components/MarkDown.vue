@@ -30,6 +30,23 @@ export default {
       console.log(v);
       this.value = v
     },
+    handleKeyPress (event) {
+      // You can put code here to handle the keypress.
+      // document.getElementById("last-keypress").innerText = event.key
+      // console.log(`You pressed ${event.keyCode},${event.ctrlKey}`)
+      if(event.ctrlKey&&event.keyCode==83){
+        // eslint-disable-next-line
+        // debugger
+        // save(this.value)
+        // 向IPC通道发送信号，此时主线程收到信号立即执行相对应的响应函数
+        console.log(window.electron,this.value);
+        window.electron.ipcRenderer.send('open-save-chart-dialog',this.value);
+      }
+    },
+
   },
+  mounted(){
+    window.addEventListener('keyup', this.handleKeyPress, true)
+  }
 }
 </script>

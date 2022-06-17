@@ -1,7 +1,5 @@
-import { dialog } from "electron";
+import { dialog, ipcMain } from "electron";
 let fs = require("fs");
-
-// let dialog = new Dialog()
 export function save(content) {
   dialog
     .showSaveDialog({
@@ -18,9 +16,11 @@ export function save(content) {
       title: "保存文件",
     })
     .then((res) => {
-      // console.log(res,content);
+      console.log(res);
     
       fs.writeFileSync(res.filePath, content);
+      // 通知渲染进程，将获取到的文件路径传给Vue组件中响应函数
+      // event.sender.send('save-finished', res);
     })
     .catch((req) => {
       console.log(req);

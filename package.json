@@ -8,8 +8,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "buildwe": "vue-cli-service electron:build",
-    "deve": "vue-cli-service electron:serve",
+    "build:electron": "vue-cli-service electron:build",
+    "dev:electron": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
